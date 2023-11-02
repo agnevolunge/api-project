@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../Components/Container/Container'
 import { Link, useParams } from 'react-router-dom'
+import { API_URL } from '../../config'
 
 const PostPage = () => {
     
@@ -15,7 +16,7 @@ const PostPage = () => {
 
     useEffect(() => {
         async function fetchPost() {
-            const res = await fetch (`https://jsonplaceholder.typicode.com/posts/${id}?_embed=comments&_expand=user`)
+            const res = await fetch (`${API_URL}/posts/${id}?_embed=comments&_expand=user`)
             const postData = await res.json()
 
             setPost(postData)

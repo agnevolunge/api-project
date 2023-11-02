@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../Components/Container/Container'
 import { Link } from 'react-router-dom'
+import { API_URL } from '../../config'
 
 const UsersPage = () => {
 
@@ -8,7 +9,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/users?_embed=posts`)
+      const res = await fetch(`${API_URL}/users?_embed=posts`)
       const usersData = await res.json()
 
       setUsers(usersData)
@@ -17,6 +18,18 @@ const UsersPage = () => {
 
     fetchUsers()
   }, [])
+
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     const res = await fetch(`https://jsonplaceholder.typicode.com/users?_embed=posts`)
+  //     const usersData = await res.json()
+
+  //     setUsers(usersData)
+  //     console.log(usersData)
+  //   }
+
+  //   fetchUsers()
+  // }, [])
 
   return (
     <Container>

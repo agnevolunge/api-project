@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from '../../Components/Container/Container'
 import { Link, useParams } from 'react-router-dom'
+import { API_URL } from '../../config'
 
 const UserPage = () => {
 
@@ -8,16 +9,25 @@ const UserPage = () => {
 
     const [user, setUser] = useState(null)
 
-  
     useEffect(() => {
-        async function fetchUser() {
-            const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums`)
-            const userData = await res.json()
+      async function fetchUser() {
+          const res = await fetch(`${API_URL}/users/${id}?_embed=posts&_embed=albums`)
+          const userData = await res.json()
 
-            setUser(userData)
-        }
-        fetchUser()
-    }, [id])
+          setUser(userData)
+      }
+      fetchUser()
+  }, [id])
+  
+    // useEffect(() => {
+    //     async function fetchUser() {
+    //         const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums`)
+    //         const userData = await res.json()
+
+    //         setUser(userData)
+    //     }
+    //     fetchUser()
+    // }, [id])
 
     if (!user) {
         return (
