@@ -10,6 +10,7 @@ const PostPage = () => {
     const { id } = useParams()
 
     const [post, setPost] = useState(null)
+    const [postDeleted, setPostDeleted] = useState(false)
 
 
     useEffect(() => {
@@ -26,37 +27,54 @@ const PostPage = () => {
     if (!post) {
       return ''
     }
+    const removePostHandler = () => {
+      fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'DELETE',
+      }) 
+      setPostDeleted(true)
+    }
 
   return (
     <Container>
-        <h1>{post.title}(Title)</h1>
-        <span>Author: 
-          <Link to={`/users/${post.user.id}`}>{post.user.name}</Link>
-        </span>
-        
-        <div>
-          <h3>Comments:</h3>
-          {post.comments && (
-          <ol>
-            {post.comments.map((comment) => (
-              <li key={post.id}>
-                <Link to={`/posts/${post.id}`}>
-                  {comment.name} 
-                </Link>
-                - {comment.body}. ({comment.email})
-              </li>
-            ))}
-          </ol>
-        )}
-        </div>
+      {postDeleted ? (
+        <>
+         <p> Post was deleted</p>
+         <Link to='/posts'>Go back to posts</Link>
+        </>
+       
+      ) : (
+      <>
+      <Link to={`/edit-post/${id}`}>Edit Post</Link>
+      <button onClick={removePostHandler}>Delete</button>
+      <h1>{post.title}(Title)</h1>
+      <span>Author: 
+        <Link to={`/users/${post.user.id}`}>{post.user.name}</Link>
+      </span>
 
-        <div>
-          <h3>
-            <Link to={'/posts'}>Other authors posts</Link>
-          </h3>
-        </div>
+      <div>
+        <h3>Comments:</h3>
+        {post.comments && (
+        <ol>
+          {post.comments.map((comment) => (
+            <li key={post.id}>
+              <Link to={`/posts/${post.id}`}>
+                {comment.name} 
+              </Link>
+              - {comment.body}. ({comment.email})
+            </li>
+          ))}
+        </ol>
+      )}
+      </div>
+
+      <div>
+        <h3>
+          <Link to={'/posts'}>Other authors posts</Link>
+        </h3>
+      </div>
+      </>
+      )}  
     </Container>
-    
   )
 }
 export default PostPage

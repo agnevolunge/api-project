@@ -37,7 +37,7 @@ const AlbumsPage = () => {
               </div>
               <div className="random-image">
                <Link to={`/users/${album.user.id}`}>
-                <img src={album.photos[0].thumbnailUrl} alt="" />
+                <img src={album.photos[0].thumbnailUrl} alt="" key={album.id} />
                </Link>
               </div>
              

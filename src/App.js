@@ -9,6 +9,8 @@ import PostPage from './Pages/PostPage/PostPage';
 import UserPage from './Pages/UserPage/UserPage';
 import AlbumPage from './Pages/AlbumPage/AlbumPage';
 import MainPage from './Pages/MainPage/MainPage';
+import CreatePostPage from './Pages/CreatePostPage/CreatePostPage';
+import EditPostPage from './Pages/EditPostPage/EditPostPage';
 // import UsersPage from './Pages/UsersPage/UsersPage';
 
 
@@ -23,6 +25,8 @@ function App() {
 
       <Route path='/posts' element={<PostsPage />} />
       <Route path='/posts/:id' element={<PostPage />} />
+      <Route path='/create-post' element={<CreatePostPage />} />
+      <Route path='/edit-post/:id' element={<EditPostPage />} />
 
       <Route path='/albums' element={<AlbumsPage />} />
       <Route path='/albums/:id' element={<AlbumPage />} />
